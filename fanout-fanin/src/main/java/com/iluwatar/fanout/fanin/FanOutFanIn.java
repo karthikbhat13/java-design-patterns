@@ -24,6 +24,7 @@ public class FanOutFanIn {
 
     ExecutorService service = Executors.newFixedThreadPool(requests.size());
 
+    // fanning out
     List<CompletableFuture<Void>> futures =
         requests.stream()
             .map(
