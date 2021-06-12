@@ -1,0 +1,25 @@
+@startuml
+package com.iluwatar.fanout.fanin {
+  class App {
+    - LOGGER : Logger {static}
+    + App()
+    + main(args : String[]) {static}
+  }
+  class Consumer {
+    - sumOfSquaredNumbers : AtomicLong
+    ~ Consumer(init : Long)
+    + add(num : Long) : Long
+    + getSumOfSquaredNumbers() : AtomicLong
+  }
+  class FanOutFanIn {
+    + FanOutFanIn()
+    + fanOutFanIn(requests : List<SquareNumberRequest>, consumer : Consumer) : Long {static}
+  }
+  class SquareNumberRequest {
+    - LOGGER : Logger {static}
+    - number : Long
+    + SquareNumberRequest(number : Long)
+    + delayedSquaring(consumer : Consumer)
+  }
+}
+@enduml
