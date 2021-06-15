@@ -21,5 +21,19 @@ package com.iluwatar.fanout.fanin {
     + SquareNumberRequest(number : Long)
     + delayedSquaring(consumer : Consumer)
   }
+
+  object SquareNumberRequest1
+  object SquareNumberRequest2
+  object SquareNumberRequest3
+  diamond dia
 }
+
+App --> FanOutFanIn
+FanOutFanIn --> "fan out - running in parallel" SquareNumberRequest1
+FanOutFanIn --> "fan out" SquareNumberRequest2
+FanOutFanIn --> "fan out" SquareNumberRequest3
+SquareNumberRequest1 --> "fan in - aggregate using callback" dia
+SquareNumberRequest2 --> "fan in" dia
+SquareNumberRequest3 --> "fan in" dia
+dia --> Consumer
 @enduml
