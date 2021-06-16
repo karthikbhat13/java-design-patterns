@@ -52,7 +52,7 @@ public class SquareNumberRequest {
 
     try {
       // this will make the thread sleep from 5-7s.
-      Thread.sleep( minTimeOut + randomTimeOut);
+      Thread.sleep(minTimeOut + randomTimeOut);
     } catch (InterruptedException e) {
       LOGGER.error("Exception while sleep ", e);
       Thread.currentThread().interrupt();
