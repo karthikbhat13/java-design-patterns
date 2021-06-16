@@ -50,6 +50,7 @@ public class SquareNumberRequest {
       Thread.sleep((long) (Math.random() * (maxTimeOut - minTimeOut) + minTimeOut));
     } catch (InterruptedException e) {
       LOGGER.error("Exception while sleep ", e);
+      Thread.currentThread().interrupt();
     } finally {
       consumer.add(number * number);
     }
