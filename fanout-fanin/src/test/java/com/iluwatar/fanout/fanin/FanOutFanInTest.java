@@ -29,10 +29,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FanOutFanInTest {
+class FanOutFanInTest {
 
   @Test
-  public void fanOutFanInTest() {
+  void fanOutFanInTest() {
     final List<Long> numbers = Arrays.asList(1L, 3L, 4L, 7L, 8L);
 
     final List<SquareNumberRequest> requests =

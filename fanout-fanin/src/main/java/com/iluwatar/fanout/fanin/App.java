@@ -63,7 +63,7 @@ public class App {
     final List<SquareNumberRequest> requests =
         numbers.stream().map(SquareNumberRequest::new).collect(Collectors.toList());
 
-    final Consumer consumer = new Consumer(0L);
+    var consumer = new Consumer(0L);
 
     // Pass the request and the consumer to fanOutFanIn or sometimes referred as Orchestrator
     // function
