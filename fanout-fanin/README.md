@@ -1,23 +1,28 @@
 ---
 layout: pattern
-title: FanOut-FanIn 
+title: Fan-Out/Fan-In
 folder: fanout-fanin
 permalink: /patterns/fanout-fanin/
-categories: Concurrency
+categories: Integration
 language: en
 tags:
-- Cloud distributed
-- Performance
+- Microservices
 ---
 
 ## Intent
-The pattern that refers to executing multiple instances of the activity function concurrently. Generally "FanOut" 
-process is splitting the data into multiple chunks that would be passed to the activity function. "FanIn" process is 
-basically aggregating the result from individual instance of activity function and forming a single final result. <br />
+The pattern is used when a source system needs to run one or more long-running process that will fetch some data. 
+Source will not block itself waiting for the reply. <br> The pattern will run the same function in multiple 
+services or machines to fetch the data. This is equivalent to invoking the function multiple times on different chunks of data.  
 
-Each activity function is a long-running process that takes in a chunk of data. A callback function, or a Consumer 
-is passed to the activity function, that will be called when the long-running process gets over. The consumer will 
-process the individual return value from activity function as they are done running into a final result.
+## Explanation
+The FanOut/FanIn service will take in a list of requests and a consumer. Each request might complete at different time.
+FanOut/FanIn service will accept the input params and returns the initial system an ID to acknowledge that the pattern
+service has received the requests. Now the caller will not wait or expect the result in the same connection. 
+
+Meanwhile, the pattern service will invoke the requests that have come. The requests might complete at different time. 
+These requests will be processed in different instances of the same function in different machines or services. As the 
+requests get completed, a callback service everytime is called that transforms the result into a common format, or a single object 
+that gets pushed to a consumer. That caller will be at the other end of the consumer receiving the result.
 
 ## Class diagram
 ![alt-text](./etc/fanout-fanin.png)
@@ -25,6 +30,11 @@ process the individual return value from activity function as they are done runn
 ## Applicability
 
 Use this pattern when you can chunk the workload or load into multiple chunks that can be dealt with separately.
+
+## Related patterns
+
+- Aggregator Microservices
+- API Gateway
 
 ## Credits
 
